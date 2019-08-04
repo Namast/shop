@@ -1,0 +1,9 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+    {% for product in object_list %}
+        <h2>{{ product.title }}</h2>
+        <p>{{ product.price }}</p>
+        <p>{{ product.product_code }}</p>
+        <p>{{ product.description }}</p>
+    {% endfor %}
+{% endblock content %}
