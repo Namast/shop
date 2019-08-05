@@ -1,0 +1,10 @@
+{% extends 'shop/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+{% for item in object_list %}
+Название:<h3>{{ item.product.title }}</h3>
+Цена:{{ item.product.price }}
+Количество:{{ item.quantity }}
+{% endfor %}
+{% endblock content %}

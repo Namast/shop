@@ -1,9 +1,12 @@
 {% extends 'shop/base.html' %}
-{% block content %}
+{% load staticfiles %}
+{% block product %}
     {% for product in object_list %}
-        <h2>{{ product.title }}</h2>
+    <div>
+        <h2><a href={% url 'product_detail' slug=product.slug %}>{{ product.title }}</a></h2>
         <p>{{ product.price }}</p>
         <p>{{ product.product_code }}</p>
         <p>{{ product.description }}</p>
+    </div>
     {% endfor %}
-{% endblock content %}
+{% endblock product %}

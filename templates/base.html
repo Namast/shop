@@ -1,12 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load staticfiles %}
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
 </head>
 <body>
+<div id="page">
+    {% include 'shop/menu.html' %}
+
+    {% include 'shop/slider.html' %}
+
     {% block content %}
 
     {% endblock content %}
+
+    {% include 'shop/footer.html' %}
+</div>
 </body>
 </html>

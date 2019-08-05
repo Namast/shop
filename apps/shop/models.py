@@ -1,4 +1,6 @@
+from django.contrib.auth.models import User
 from django.db import models
+
 from mptt.models import MPTTModel, TreeForeignKey
 
 class Category(MPTTModel):
@@ -34,3 +36,43 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Cart(models.Model):
+    """Корзина"""
+    user = models.ForeignKey(User, verbose_name='Покупатель', on_delete=models.CASCADE)
+    accepted = models.BooleanField(verbose_name='Принято к заказу', default=False)
+
+    class Meta:
+        verbose_name = 'Корзина'
+        verbose_name_plural = 'Корзины'
+
+    def __str__(self):
+        return '{}'.format(self.user)
+
+
+class CartItem(models.Model):
+    """Товары в корзине"""
+    cart = models.ForeignKey(Cart, verbose_name='Корзина', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, verbose_name='Корзина', on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField('Количество', default=0)
+
+    class Meta:
+        verbose_name = 'Товар в корзине'
+        verbose_name_plural = 'Товары в корзине'
+
+    def __str__(self):
+        return '{}'.format(self.cart)
+
+
+class Order(models.Model):
+    """Заказы"""
+    cart = models.ForeignKey(Cart, verbose_name='Корзина', on_delete=models.CASCADE)
+    accepted = models.BooleanField(verbose_name='Заказ выполнен', default=False)
+
+    class Meta:
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
+
+    def __str__(self):
+        return '{}'.format(self.cart)
